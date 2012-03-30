@@ -28,6 +28,20 @@
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
+
+  <script type="text/javascript" src="https://raw.github.com/ahmontero/pyramid/master/src/pyramid.js" />
+
+  <script>
+    $('#pyramid').Pyramid({
+      'height': 350,
+      'width': 350,
+      'slices':4,
+      'slice_separation': 0.1,
+      'colours': ['red', 'yellow', 'green', 'blue'],
+      'text': ['1', '2', '3', '4']
+     })
+     .on('click', function(event){ alert(event.text) });
+  </script>
 </head>
 
 <body>
@@ -49,7 +63,7 @@
       Javascript plugin to generate simple pyramids with some text inside
     </div>
 
-    
+    <div id="pyramid"></div>
 
     
 
@@ -65,7 +79,8 @@
 
     
       <h2>Authors</h2>
-      <p>@ahmontero<br/>      </p>
+      <p>@ahmontero
+<br/>      </p>
     
 
     
@@ -86,6 +101,18 @@
     </div>
 
   </div>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30475102-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 
 </body>
 </html>
