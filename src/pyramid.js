@@ -91,15 +91,15 @@
 
     Plugin.prototype.render = function () {
         var inline =
-            '<?xml version="1.0"?>'+
-            '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'+
+            //'<?xml version="1.0"?>'+
+            //'<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'+
             '<svg id="svg_root"'+
                 'width="500" height="500"'+
                 'viewBox="-800 0 2000 500"'+
                 'preserveAspectRatio="xMidYMid slice"'+
                 'xmlns="' +svgns+ '" version="1.1">'+
             '</svg>';
-        this.element.parent('div:first').append(inline);
+        this.element.append(inline);
 
         var points = this.getPoints();
 
@@ -121,7 +121,7 @@
 
     Plugin.prototype.createPolygon = function (points, text, colour){
         var middle_point = this.get_xy_middle(points[0], points[2]);
-        var svg_root = this.element.parent('div:first').find('#svg_root');
+        var svg_root = this.element.parent('div').find('#svg_root');
 
         var path_points = points[0].x +' '+ points[0].y +','+
         points[1].x +' '+ points[1].y +','+
