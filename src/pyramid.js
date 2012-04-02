@@ -39,7 +39,16 @@
             text: ['123', '245', '15', '23'],
             text_size: 20,
         },
-        svgns = 'http://www.w3.org/2000/svg';
+        svgns = 'http://www.w3.org/2000/svg',
+        template =  ''+
+                       ' <svg id="svg_root"'+
+                            'width="500" height="500"'+
+                            'viewBox="-800 0 2000 500"'+
+                            'preserveAspectRatio="xMidYMid slice"'+
+                            'xmlns="' +svgns+ '" version="1.1">'+
+                        '</svg>'+
+                    '';
+
 
     function Point(x, y){
         this.x = x;
@@ -79,6 +88,9 @@
         this.colours = this.options.colours;
         this.text = this.options.text;
         this.text_size = this.options.text_size || 20;
+        this.pyramid = $(template).appendTo(this.element).on({
+                                click: $.proxy(this.click, this)
+                        });
 
         if (this.component){
             this.component.on('click', $.proxy(this.show, this));
@@ -90,17 +102,6 @@
     };
 
     Plugin.prototype.render = function () {
-        var inline =
-            //'<?xml version="1.0"?>'+
-            //'<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'+
-            '<svg id="svg_root"'+
-                'width="500" height="500"'+
-                'viewBox="-800 0 2000 500"'+
-                'preserveAspectRatio="xMidYMid slice"'+
-                'xmlns="' +svgns+ '" version="1.1">'+
-            '</svg>';
-        this.element.append(inline);
-
         var points = this.getPoints();
 
         //create bottom slice
@@ -132,7 +133,6 @@
         polygon.setAttributeNS(null, "points", path_points);
         polygon.setAttributeNS(null, "fill", colour);
         polygon.setAttributeNS(null, "stroke", "black");
-        polygon.addEventListener("click",this,false);
 
         var data = document.createTextNode(text);
         var text = document.createElementNS(svgns,"text");
@@ -147,15 +147,24 @@
         svg_root.append(text);
     }
 
-    Plugin.prototype.handleEvent = function(evt){
+    Plugin.prototype.click = function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var target = $(e.target).closest('polygon, text');
 
-        switch (evt.type){
-            case "click":
-                var target = evt.target;
-                var textnode = target.nextSibling;
-                var txt = textnode.firstChild.nodeValue;
-                this.element.trigger({type: 'click', text:txt});
-                break;
+        if (target.length == 1) {
+            switch(target[0].nodeName.toLowerCase()) {
+                case 'polygon':
+                    var nodetext =  $(target[0]).next();
+                    var _text = nodetext.text();
+                    this.element.trigger({type: 'click', text:_text});
+                    break;
+
+                case 'text':
+                    var _text = target.text();
+                    this.element.trigger({type: 'click', text:_text});
+                    break;
+            }
         }
     }
 
