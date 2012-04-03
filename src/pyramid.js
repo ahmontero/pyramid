@@ -39,16 +39,7 @@
             text: ['123', '245', '15', '23'],
             text_size: 20,
         },
-        svgns = 'http://www.w3.org/2000/svg',
-        template =  ''+
-                       ' <svg id="svg_root"'+
-                            'width="500" height="500"'+
-                            'viewBox="-800 0 2000 500"'+
-                            'preserveAspectRatio="xMidYMid slice"'+
-                            'xmlns="' +svgns+ '" version="1.1">'+
-                        '</svg>'+
-                    '';
-
+        svgns = 'http://www.w3.org/2000/svg';
 
     function Point(x, y){
         this.x = x;
@@ -91,6 +82,14 @@
         this.pyramid = $(template).appendTo(this.element).on({
                                 click: $.proxy(this.click, this)
                         });
+        this.template =''+
+                       '<svg id="svg_root"'+
+                            'width=' +this.width+ 'height=' +this.height+
+                            'viewBox="-800 0 2000 500"'+
+                            'preserveAspectRatio="xMidYMid slice"'+
+                            'xmlns="' +svgns+ '" version="1.1">'+
+                        '</svg>'+
+                        ''
 
         if (this.component){
             this.component.on('click', $.proxy(this.show, this));
@@ -122,7 +121,7 @@
 
     Plugin.prototype.createPolygon = function (points, text, colour){
         var middle_point = this.get_xy_middle(points[0], points[2]);
-        var svg_root = this.element.parent('div').find('#svg_root');
+        var svg_root = this.element.find('#svg_root');
 
         var path_points = points[0].x +' '+ points[0].y +','+
         points[1].x +' '+ points[1].y +','+
@@ -232,4 +231,5 @@
     }
 
 })( jQuery, window, document );
+
 
