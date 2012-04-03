@@ -81,7 +81,7 @@
         this.text_size = this.options.text_size || 20;
         this.template =''+
                        '<svg id="svg_root"'+
-                            'width=' +this.width+ 'height=' +this.height+
+                            'width="' +this.base+ '" height="' +this.height+ '" '+
                             'viewBox="-800 0 2000 500"'+
                             'preserveAspectRatio="xMidYMid slice"'+
                             'xmlns="' +svgns+ '" version="1.1">'+
