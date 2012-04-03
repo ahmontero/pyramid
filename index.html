@@ -10,20 +10,14 @@
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="https://raw.github.com/ahmontero/pyramid/master/src/pyramid.js" ></script>
+    <script type="text/javascript" src="javascripts/main.js" ></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-             $('#pyramid').Pyramid({
-              'height': 350,
-              'width': 350,
-              'slices':4,
-              'slice_separation': 0.1,
-              'colours': ['red', 'yellow', 'green', 'blue'],
-              'text': ['1', '2', '3', '4']
-             })
-             .on('click', function(event){ alert(event.text) });
+         $(document).ready(function(){
+             createPyramid();
         });
     </script>
+
 
     <title>Pyramid</title>
   </head>
@@ -51,9 +45,7 @@
         <h3>Pyramid.js</h3>
 
 <p>Pyramid.js allows you to create simple pyramids with some text in it. Moreover, it raises a 'click' event when you click on any slice</p>
-
 <div id="pyramid"></div>
-
 <h3>Author</h3>
 
 <p>Antonio H Montero (<a href="/ahmontero" class="user-mention">@ahmontero</a>).</p>
