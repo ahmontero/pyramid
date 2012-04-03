@@ -79,9 +79,6 @@
         this.colours = this.options.colours;
         this.text = this.options.text;
         this.text_size = this.options.text_size || 20;
-        this.pyramid = $(template).appendTo(this.element).on({
-                                click: $.proxy(this.click, this)
-                        });
         this.template =''+
                        '<svg id="svg_root"'+
                             'width=' +this.width+ 'height=' +this.height+
@@ -89,7 +86,10 @@
                             'preserveAspectRatio="xMidYMid slice"'+
                             'xmlns="' +svgns+ '" version="1.1">'+
                         '</svg>'+
-                        ''
+                        '';
+        this.pyramid = $(this.template).appendTo(this.element).on({
+                                click: $.proxy(this.click, this)
+                        });
 
         if (this.component){
             this.component.on('click', $.proxy(this.show, this));
